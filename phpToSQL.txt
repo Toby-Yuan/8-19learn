@@ -30,3 +30,5 @@ while ($row = mysqli_fetch_assoc($result))
 
 // 關閉連線
 mysqli_close($link);
+
+point : 可以等程式可以執行再複製貼上至執行碼
