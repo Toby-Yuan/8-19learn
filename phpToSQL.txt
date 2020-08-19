@@ -1,0 +1,32 @@
+// 連接資料庫
+// 請求連線          位置:127.0.0.1     帳號     密碼   資料庫  port
+$link = @mysqli_connect("localhost", "root", "root", null, 8889) or die(mysqli_connect_error())
+--> @ : 暫時停用錯誤訊息
+--> or die(mysqli_connect_error()) : 連線失敗的話顯示錯誤訊息, die有結束程式的功用
+
+// 以UTF-8編碼連線
+$result = mysqli_query($link, "set names utf8");
+
+// 連到指定資料庫
+mysqli_select_db($link, "class");
+
+// 在PHP中設定SQL指令
+// 搜尋所有資料
+$commandText = "select * from students";
+
+// 連線並且接受資料
+$result = mysqli_query($link, $commandText);
+
+// 處理資料
+while ($row = mysqli_fetch_assoc($result))
+{
+  echo "ID：{$row['cID']}<br>";
+  echo "Name：{$row['cName']}<br>";
+  echo "<HR>";
+}
+--> mysqli_fetch_assoc($result) : 提取每一列, 並且轉換成陣列
+--> $row['cID'] : 這列資料中, cID這欄的資料內容
+--> 在""中, 如果直接打$row['cID'](陣列)會無法提取, 需要打在{}裡面
+
+// 關閉連線
+mysqli_close($link);
