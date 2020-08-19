@@ -1,0 +1,26 @@
+// 建立資料
+CREATE database db0819 DEFAULT character set utf8;
+
+use db0819;
+
+CREATE table city(
+    cityId int auto_increment not null primary key,
+    cityName varchar(20)
+);
+
+INSERT INTO city VALUES (1, 'Taipei'), (2, 'Taichung'), (3, 'Tainan');
+
+CREATE table employee(
+    employeeId int auto_increment not null primary key,
+    firstName varchar(20),
+    lastName varchar(20),
+    cityId int
+);
+
+INSERT INTO employee (firstName, lastName, cityId)
+VALUES ('Jimmey', 'Lian', 2), ('Tony', 'Yang', 1);
+
+// 欄位顯示
+SELECT firstName, lastName, 
+(SELECT cityName FROM city WHERE cityId = e.cityId) city
+FROM employee e
